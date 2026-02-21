@@ -1,0 +1,212 @@
+:root {
+  --rc-bg: #f7f5ef;
+  --rc-card: linear-gradient(155deg, #114236 0%, #0f352d 58%, #0c2c25 100%);
+  --rc-card-border: rgba(255, 255, 255, 0.14);
+  --rc-text-main: #f8f7f2;
+  --rc-text-subtle: rgba(248, 247, 242, 0.78);
+  --rc-gold: #dcc17f;
+  --rc-gold-soft: rgba(220, 193, 127, 0.35);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --rc-bg: #0a1110;
+    --rc-card: linear-gradient(155deg, #0f352d 0%, #0d2d25 58%, #081d18 100%);
+    --rc-card-border: rgba(220, 193, 127, 0.24);
+    --rc-text-main: #fbfaf6;
+    --rc-text-subtle: rgba(251, 250, 246, 0.8);
+    --rc-gold: #e6cb8a;
+    --rc-gold-soft: rgba(230, 203, 138, 0.4);
+  }
+}
+
+.home-screen {
+  min-height: 100vh;
+  background: var(--rc-bg);
+  padding: 18px 14px 26px;
+}
+
+.home-screen__section-label {
+  margin: 0 0 10px;
+  font-size: 0.86rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #5a6b67;
+}
+
+.prayer-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  background: var(--rc-card);
+  border: 1px solid var(--rc-card-border);
+  box-shadow: 0 16px 30px rgba(8, 18, 16, 0.22);
+  padding: 18px 16px;
+  color: var(--rc-text-main);
+  isolation: isolate;
+}
+
+.prayer-card__pattern {
+  position: absolute;
+  inset: -10% -20% auto auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 999px;
+  background:
+    radial-gradient(
+      circle at 28% 30%,
+      rgba(255, 255, 255, 0.09),
+      transparent 52%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent 0 11px,
+      rgba(220, 193, 127, 0.07) 11px 12px
+    );
+  pointer-events: none;
+  z-index: -1;
+}
+
+.prayer-card__top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.prayer-card__eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rc-text-subtle);
+}
+
+.prayer-card__name {
+  margin: 2px 0 0;
+  font-size: 1.32rem;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+.prayer-card__crescent {
+  color: var(--rc-gold);
+  font-size: 1.3rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(220, 193, 127, 0.34));
+}
+
+.prayer-card__main-time {
+  margin-top: 16px;
+  font-size: clamp(2rem, 8.2vw, 2.5rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.prayer-card__countdown-wrap {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.prayer-card__countdown-label {
+  font-size: 0.86rem;
+  color: var(--rc-text-subtle);
+}
+
+.prayer-card__countdown {
+  font-size: 1.02rem;
+  color: var(--rc-gold);
+  letter-spacing: 0.01em;
+}
+
+.prayer-card__progress {
+  margin-top: 12px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+}
+
+.prayer-card__progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--rc-gold-soft), var(--rc-gold));
+  transition: width 400ms ease;
+}
+
+.prayer-card__meta-grid {
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 11px;
+}
+
+.prayer-card__meta-item {
+  display: grid;
+  gap: 2px;
+}
+
+.prayer-card__meta-label {
+  color: var(--rc-text-subtle);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.prayer-card__meta-value {
+  font-size: 0.95rem;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.pulse {
+  animation: prayerPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes prayerPulse {
+  0%,
+  100% {
+    text-shadow: 0 0 0 rgba(220, 193, 127, 0);
+    opacity: 1;
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(220, 193, 127, 0.33);
+    opacity: 0.96;
+  }
+}
+
+@media (min-width: 420px) {
+  .home-screen {
+    padding-inline: 18px;
+  }
+
+  .prayer-card {
+    padding: 20px 18px;
+  }
+
+  .prayer-card__meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
+
+  .prayer-card__progress-fill {
+    transition: none;
+  }
+}
